@@ -9,7 +9,7 @@ Hosting: Heroku
 Data Visualization: [d3.js](https://github.com/d3/d3/wiki)
 ```
 
-##Team Members:
+## Team Members:
 * [Saiman Tamang](https://github.com/saimantmg01)
 * [Fourcan Abdullah](https://github.com/FourcanAbdullah)
 * [Jonathan Shnayder](https://github.com/JonathanDog)
