@@ -1,4 +1,4 @@
-# restaurant_violations
+# reasturant_app
 
 ## Project setup
 ```
