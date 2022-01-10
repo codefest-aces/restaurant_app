@@ -35,17 +35,9 @@
       ></v-text-field>
     </v-toolbar>
 
-    <v-card-text class="py-0">
-      <v-chip
-        v-for="(keyword, i) in keywords"
-        :key="i"
-        class="mr-2"
-      >
-        {{ keyword }}
-      </v-chip>
-    </v-card-text>
+    
 
-    <v-list three-line>
+    <v-list three-line v-bind:class="{ active: isActive }">
       <v-list-item
         v-for="(item, i) in searching"
         :key="i"
@@ -62,10 +54,10 @@
         <v-list-item-content>
           <span
             class="text-uppercase font-weight-regular text-caption"
-            v-text="item.category"
+            v-text="item.cuisine_description"
           ></span>
 
-          <div v-text="item.title"></div>
+          <div v-text="item.dba"></div>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -81,67 +73,78 @@
 
 <script>
 
+
   export default {
     data: () => ({
       items: [
-        {
 
-          title: 'Chens Garden',
-          category: 'Chinese',
-          keyword: 'Drinks',
-
-        },
-        {
-
-          title: 'Eat Italian',
-          category: 'Italian',
-          keyword: 'Phones',
-        },
-        {
-
-          title: 'Tonys Pizza',
-          category: 'Pizza',
-          keyword: 'Social',
-        },
-        {
-
-          title: 'Misaki Sushi',
-          category: 'Japanese',
-          keyword: 'Military',
-        },
-        {
-
-          title: 'McDonalds',
-          category: 'Fast Food',
-          keyword: 'Social',
-        },
       ],
       search: '',
+      isActive: false
     }),
-
+    methods:{
+      turnOff() {
+        this.isActive = false
+      }
+    },
     computed: {
-      keywords () {
-        if (!this.search) return []
+    searching () {
 
-        const keywords = []
+      if (!this.search || this.search.length < 3) {
+        //console.log(this.isActive)
+        // if(this.isActive) {
+        //   turnOff()
+        // }
+          return []
+      }
 
-        for (const search of this.searching) {
-          keywords.push(search.keyword)
-        }
 
-        return keywords
-      },
-      searching () {
-        if (!this.search) return []
 
         const search = this.search.toLowerCase()
 
         return this.items.filter(item => {
-          const text = item.title.toLowerCase()
+          this.isActive = true
+          let text = ""
+          if(item.dba) {
+             text = item.dba.toLowerCase()
+          }
+
+
+
 
           return text.indexOf(search) > -1
         })
+
       },
     },
+    async mounted () {
+      const axios = require('axios').default;
+
+      let response = await axios.get("https://data.cityofnewyork.us/resource/43nn-pn8j.json?$where=inspection_date > '2020-01-01T00:00:00.000'&$limit=100000");
+
+      let data = response.data
+      let distinct = []
+      let results = []
+      for(let i = 0; i < data.length; i++) {
+        if(!distinct.includes(data[i].camis)) {
+
+          distinct.push(data[i].camis)
+          results.push(data[i])
+
+        }
+      }
+
+
+      this.items = results
+      console.log(this.items)
+    }
+
   }
 </script>
+<style >
+.active{
+  height: 800px;
+  overflow-y:auto;
+
+}
+</style>
