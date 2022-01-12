@@ -3,7 +3,7 @@
 
     <v-main class="grey lighten-3">
       <v-container>
-        <v-row>
+        <v-row justify='center'>
 
 
           <v-col
