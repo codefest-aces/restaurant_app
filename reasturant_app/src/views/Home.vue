@@ -35,7 +35,7 @@
       ></v-text-field>
     </v-toolbar>
 
-    
+
 
     <v-list three-line v-bind:class="{ active: isActive }">
       <v-list-item
@@ -60,7 +60,7 @@
           <div v-text="item.dba"></div>
         </router-link>
 
-        </v-list-item-content>  
+        </v-list-item-content>
       </v-list-item>
     </v-list>
   </v-card>
@@ -120,25 +120,8 @@
       },
     },
     async mounted () {
-      const axios = require('axios').default;
 
-      let response = await axios.get("https://data.cityofnewyork.us/resource/43nn-pn8j.json?$where=inspection_date > '2020-01-01T00:00:00.000'&$limit=100000");
-
-      let data = response.data
-      let distinct = []
-      let results = []
-      for(let i = 0; i < data.length; i++) {
-        if(!distinct.includes(data[i].camis)) {
-
-          distinct.push(data[i].camis)
-          results.push(data[i])
-
-        }
-      }
-
-
-      this.items = results
-      console.log(this.items)
+      this.items = this.$store.state.apiData
     }
 
   }
