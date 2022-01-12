@@ -7,141 +7,124 @@
 
 
           <v-col
-            cols="12"
-            sm="12"
+            cols="8"
+            
           >
-            <v-sheet
-              min-height="70vh"
-              rounded="lg"
-            >
+
+
               
                 <v-form
                     ref="form"
-                    v-model="valid"
+                    v-model="search"
+        append-icon="mdi-magnify"
+        label="Search Restaurants"
                     lazy-validation
+
                 >
                     <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
+                    v-model="search"
                     label="Restaurant Name"
-                    required
+                    
                     ></v-text-field>
 
-                    <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                    ></v-text-field>
 
                     <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
+                    v-model="camis_id"
+                    
                     label="CAMIS ID"
-                    required
+                  
                     ></v-text-field>
 
                     <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
+                    v-model="address"
+                    
                     label="Address"
-                    required
+                  
                     ></v-text-field>
 
                     <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
+                    v-model="borough"
+                    
                     label="Borough"
-                    required
+                    
                     ></v-text-field>
 
                     <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
+                    v-model="Cuisine_Type"
                     label="Cuisine Type"
-                    required
+                    
                     ></v-text-field>
 
                     <v-text-field
-                    v-model="name"
+                    v-model="phone"
                     :counter="10"
-                    :rules="nameRules"
                     label="Phone #"
-                    required
+                    
                     ></v-text-field>
 
 
                     <v-text-field
-                    v-model="name"
-                    :counter="5"
-                    :rules="nameRules"
-                    label="Zipcode"
-                    required
+                    v-model="zip"
+                    label="zipcode"
+                    
                     ></v-text-field>
 
                     <v-select
-                    v-model="select"
+                    v-model="grade"
                     :items="items"
-                    :rules="[v => !!v || 'Item is required']"
+                    
                     label="Grade"
-                    required
+                    
                     ></v-select>
 
                     <v-select
-                    v-model="select"
-                    :items="items"
-                    :rules="[v => !!v || 'Item is required']"
+                    v-model="v_code"
+                    :items="codes"
+                    
                     label="Violation Code"
-                    required
+                    
                     ></v-select>
 
                     <v-select
-                    v-model="select"
-                    :items="items"
-                    :rules="[v => !!v || 'Item is required']"
+                    v-model="critical_flag"
+                    :items="flags"
                     label="Critical Flag"
-                    required
+                    
                     ></v-select>
                     
 
                     <v-btn
-                    :disabled="!valid"
-                    color="success"
-                    class="mr-4"
-                    @click="validate"
-                    >
-                    Validate
-                    </v-btn>
-
-                    <v-btn
                     color="error"
                     class="mr-4"
-                    @click="reset"
+                    @click="searching"
                     >
-                    Reset Form
+                    Search
                     </v-btn>
 
-                    <v-btn
-                    color="warning"
-                    @click="resetValidation"
-                    >
-                    Reset Validation
-                    </v-btn>
                 </v-form>
 
               <div>
-    <ul v-for="post in posts" v-bind:key="post.camis">
-      <li>{{ post.dba }}</li>
-      <p>{{ post.violation_description }}</p>
-    </ul>
+                <v-list three-line v-bind:class="{ active: isActive }">
+      <v-list-item
+        v-for="(item, i) in searching"
+        :key="i"
+        ripple
+        @click="() => {}"
+      >
+        
+
+        <v-list-item-content>
+          <span
+            class="text-uppercase font-weight-regular text-caption"
+            v-text="item.cuisine_description"
+          ></span>
+
+          <div v-text="item.dba"></div>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </div>
               
-            </v-sheet>
           </v-col>
 
         </v-row>
@@ -151,52 +134,92 @@
 </template>
 
 <script>
+
+
   export default {
     data: () => ({
-      posts: [],
-      valid: true,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      select: null,
       items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-    }),
 
-    methods: {
-      validate () {
-        this.$refs.form.validate()
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
-      async getData() {
-      try {
-        let response = await fetch("https://data.cityofnewyork.us/resource/43nn-pn8j.json?$where=score%20==100");
-        this.posts = await response.json();;
-      } catch (error) {
-        console.log(error);
+      ],
+      codes: [],
+      flags: [],
+      
+      search: '',
+      camis_id: '',
+      address: '',
+      borough: '',
+      Cuisine_Type: '',
+      phone: '',
+      zipcode: '',
+      grade: '',
+      v_code: '',
+      critical_flag: '',
+
+      isActive: false
+    }),
+    methods:{
+      turnOff() {
+        this.isActive = false
       }
     },
-  },
+    computed: {
+    searching () {
 
-  created() {
-    this.getData();
-  },
+      if (!this.search || this.search.length < 3) {
+        //console.log(this.isActive)
+        // if(this.isActive) {
+        //   turnOff()
+        // }
+          return []
+      }
+
+
+
+        const search = this.search.toLowerCase()
+
+        return this.items.filter(item => {
+          this.isActive = true
+          let text = ""
+          if(item.dba) {
+             text = item.dba.toLowerCase()
+          }
+
+
+
+
+          return text.indexOf(search) > -1
+        })
+
+      },
+    },
+    async mounted () {
+      const axios = require('axios').default;
+
+      let response = await axios.get("https://data.cityofnewyork.us/resource/43nn-pn8j.json?$where=inspection_date > '2020-01-01T00:00:00.000'&$limit=100000");
+
+      let data = response.data
+      let distinct = []
+      let results = []
+      for(let i = 0; i < data.length; i++) {
+        if(!distinct.includes(data[i].camis)) {
+
+          distinct.push(data[i].camis)
+          results.push(data[i])
+
+        }
+      }
+
+
+      this.items = results
+      console.log(this.items)
+    }
 
   }
 </script>
+<style >
+.active{
+  height: 800px;
+  overflow-y:auto;
+
+}
+</style>
