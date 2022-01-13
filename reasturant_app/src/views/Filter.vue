@@ -8,11 +8,11 @@
 
           <v-col
             cols="8"
-            
+
           >
 
 
-              
+
                 <v-form
                     ref="form"
                     v-model="search"
@@ -24,74 +24,74 @@
                     <v-text-field
                     v-model="search"
                     label="Restaurant Name"
-                    
+
                     ></v-text-field>
 
 
                     <v-text-field
                     v-model="camis_id"
-                    
+
                     label="CAMIS ID"
-                  
+
                     ></v-text-field>
 
                     <v-text-field
                     v-model="address"
-                    
+
                     label="Address"
-                  
+
                     ></v-text-field>
 
                     <v-text-field
                     v-model="borough"
-                    
+
                     label="Borough"
-                    
+
                     ></v-text-field>
 
                     <v-text-field
                     v-model="Cuisine_Type"
                     label="Cuisine Type"
-                    
+
                     ></v-text-field>
 
                     <v-text-field
                     v-model="phone"
                     :counter="10"
                     label="Phone #"
-                    
+
                     ></v-text-field>
 
 
                     <v-text-field
                     v-model="zip"
                     label="zipcode"
-                    
+
                     ></v-text-field>
 
                     <v-select
                     v-model="grade"
                     :items="items"
-                    
+
                     label="Grade"
-                    
+
                     ></v-select>
 
                     <v-select
                     v-model="v_code"
                     :items="codes"
-                    
+
                     label="Violation Code"
-                    
+
                     ></v-select>
 
                     <v-select
                     v-model="critical_flag"
                     :items="flags"
                     label="Critical Flag"
-                    
+
                     ></v-select>
-                    
+
 
                     <v-btn
                     color="error"
@@ -111,7 +111,7 @@
         ripple
         @click="() => {}"
       >
-        
+
 
         <v-list-item-content>
           <span
@@ -124,7 +124,7 @@
       </v-list-item>
     </v-list>
   </div>
-              
+
           </v-col>
 
         </v-row>
@@ -143,7 +143,7 @@
       ],
       codes: [],
       flags: [],
-      
+
       search: '',
       camis_id: '',
       address: '',
