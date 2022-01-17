@@ -21,7 +21,20 @@
                 <v-btn @click= "requestCall">Show information</v-btn>
                 <!-- <p>{{result}}</p> -->
                 <!--Information about restaurant: Content-->
+
                 <div class="information" v-if="show_data === true">
+                <!----Map--->
+                <!-- <Map v-bind:lat="result[0].latitude" v-bind:lon="result[0].longitude"/> -->
+                  <div class = "basic_info"> 
+                    <div class="restaurant_map">
+                      <l-map style="height: 300px" :zoom="zoom" :center="center">
+                        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                        <l-marker :lat-lng="markerLatLng">
+                        </l-marker>
+                      </l-map>
+                    </div>
+
+                    <div class="restaurant_information">
                     <ul>
                         <li>Camis: {{result[0].camis}}</li>
                         <li>DBA: {{result[0].dba}}</li>
@@ -32,6 +45,13 @@
                         <li>Phone: {{result[0].phone}}</li>
                         <li>Cuisine Description: {{result[0].cuisine_description}}</li>
                     </ul>
+                  </div> 
+                  </div>
+                  
+                  
+                <!---------->    
+                  
+                    
                     <!--data of inspection results -->
                 <!-- <ul>
                     <li v-for="(character,index) in result" :key="character.camis">{{index}}- {{character}}</li>
@@ -58,8 +78,18 @@
 </template>
 
 <script>
+//import Map from "@/components/Map.vue"
+import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
 export default {
     props: ['camis'],
+    // components: {
+    //   Map
+    // },
+    components: {
+      LMap,
+      LTileLayer,
+      LMarker
+    },
     //trying to call to api
     data() {
         return {
@@ -68,16 +98,21 @@ export default {
               {text:'Action', value:'action'},
               {text:'Violation_code', value:'violation_code'},
               {text:'Violation_desc', value:'violation_description'},
-              {text:'Violation_code', value:'violation_code'},
               {text:'critical_flag', value:'critical_flag'},
               {text:'score', value:'score'},
               {text:'Grade', value:'grade'},
               {text:'Grade_date', value:'grade_date'},
-              {text:'record_date', value:'record_Date'},
+              {text:'record_date', value:'record_date'},
               {text:'inspection_type', value:'inspection_type'}
           ],
           result: [],
-          show_data: false  
+          show_data: false,
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution:
+        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          zoom: 15,
+          center: [51.505, -0.159],
+          markerLatLng: [51.504, -0.159]
         } 
     },
     methods: {
@@ -90,6 +125,8 @@ export default {
             this.result = response.data
             //console.log(`result is {this.result}`)
             this.show_data = !this.show_data
+            this.center = [this.result[0].latitude, this.result[0].longitude]
+            this.markerLatLng = [this.result[0].latitude, this.result[0].longitude]
         }
     }
 
@@ -97,5 +134,20 @@ export default {
 </script>
 
 <style>
+.basic_info {
+  display: flex;
+}
+.restaurant_map{
+  float:left;
+  width:50%;
+  padding: 5px;
+}
+.restaurant_info {
+  float:right;
+  width:67%;
 
+}
+.basic_info ul {
+  list-style: none;
+}
 </style>
