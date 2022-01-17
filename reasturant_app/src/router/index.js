@@ -21,7 +21,8 @@ const routes = [
   {
     path: "/filter",
     name: "Filter",
-    component: Filter
+    component: Filter,
+    props: true
   },
   {
     path: "/:camis",
