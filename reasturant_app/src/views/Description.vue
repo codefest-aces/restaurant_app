@@ -16,16 +16,17 @@
             >
               <!--  -->
 
-              <h1>This is description page</h1>
-              <p>this is {{camis}}</p>
-                <v-btn @click= "requestCall">Show information</v-btn>
+              <!-- <h1>This is description page</h1>
+              <p>this is {{camis}}</p> -->
+                <!-- <v-btn @click= "requestCall">Show information</v-btn> -->
                 <!-- <p>{{result}}</p> -->
                 <!--Information about restaurant: Content-->
-
-                <div class="information" v-if="show_data === true">
+                <h1 class="name pt-5"> {{result[0].dba}}</h1>
+                <!-- <div class="information" v-if="show_data === true"> -->
+                <div class="information">
                 <!----Map--->
                 <!-- <Map v-bind:lat="result[0].latitude" v-bind:lon="result[0].longitude"/> -->
-                  <div class = "basic_info"> 
+                  <div class = "basic_info my-5"> 
                     <div class="restaurant_map">
                       <l-map style="height: 300px" :zoom="zoom" :center="center">
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -95,7 +96,6 @@ export default {
         return {
           headers: [
               {text:'Date', value:'inspection_date'},
-              {text:'Action', value:'action'},
               {text:'Violation_code', value:'violation_code'},
               {text:'Violation_desc', value:'violation_description'},
               {text:'critical_flag', value:'critical_flag'},
@@ -106,7 +106,7 @@ export default {
               {text:'inspection_type', value:'inspection_type'}
           ],
           result: [],
-          show_data: false,
+          //show_data: false,
           url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -115,9 +115,8 @@ export default {
           markerLatLng: [51.504, -0.159]
         } 
     },
-    methods: {
-        async requestCall() {
-            //console.log(this.camis)
+    async mounted() {
+      //console.log(this.camis)
             const axios = require('axios').default;
             let url = "https://data.cityofnewyork.us/resource/43nn-pn8j.json?camis=" + this.camis
             let response = await axios.get(url)
@@ -127,7 +126,6 @@ export default {
             this.show_data = !this.show_data
             this.center = [this.result[0].latitude, this.result[0].longitude]
             this.markerLatLng = [this.result[0].latitude, this.result[0].longitude]
-        }
     }
 
 }
@@ -136,6 +134,8 @@ export default {
 <style>
 .basic_info {
   display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .restaurant_map{
   float:left;
@@ -150,4 +150,8 @@ export default {
 .basic_info ul {
   list-style: none;
 }
+.name {
+  text-align: center;
+}
+
 </style>
