@@ -51,12 +51,12 @@
           min-width="64"
         ></v-img>
         <v-list-item-content>
+         <!--description page links-->
+        <router-link :to="{name: 'Description', params: {camis: item.camis}}" class="routerlinks">  
           <span
             class="text-uppercase font-weight-regular text-caption"
             v-text="item.cuisine_description"
           ></span>
- <!--description page links-->
-        <router-link :to="{name: 'Description', params: {camis: item.camis}}">
           <div v-text="item.dba"></div>
         </router-link>
 
@@ -131,5 +131,8 @@
   height: 800px;
   overflow-y:auto;
 
+}
+.routerlinks {
+  text-decoration: none;
 }
 </style>
