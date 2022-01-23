@@ -23,8 +23,8 @@
                         <li>Camis: {{result[0].camis}}</li>
                         <li>DBA: {{result[0].dba}}</li>
                         <li>Building: {{result[0].building}}</li>
-                        <li>Borough: {{result[0].boro}}</li>
                         <li>Street: {{result[0].street}}</li>
+                        <li>Borough: {{result[0].boro}}</li>
                         <li>Zipcode: {{result[0].zipcode}}</li>
                         <li>Phone: {{result[0].phone}}</li>
                         <li>Cuisine Description: {{result[0].cuisine_description}}</li>
