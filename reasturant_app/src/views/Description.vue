@@ -1,31 +1,14 @@
 <template>
   <v-app id="inspire">
-
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-
-
-          <v-col
-            cols="12"
-            sm="12"
-          >
-            <v-sheet
-              min-height="70vh"
-              rounded="lg"
-            >
-              <!--  -->
-
-              <!-- <h1>This is description page</h1>
-              <p>this is {{camis}}</p> -->
-                <!-- <v-btn @click= "requestCall">Show information</v-btn> -->
-                <!-- <p>{{result}}</p> -->
-                <!--Information about restaurant: Content-->
+          <v-col cols="12" sm="12">
+            <v-sheet min-height="70vh" rounded="lg">
+                <!--Content-->
                 <h1 class="name pt-5"> {{result[0].dba}}</h1>
-                <!-- <div class="information" v-if="show_data === true"> -->
                 <div class="information">
                 <!----Map--->
-                <!-- <Map v-bind:lat="result[0].latitude" v-bind:lon="result[0].longitude"/> -->
                   <div class = "basic_info my-5"> 
                     <div class="restaurant_map">
                       <l-map style="height: 300px" :zoom="zoom" :center="center">
@@ -34,7 +17,7 @@
                         </l-marker>
                       </l-map>
                     </div>
-
+                  <!--Information about restaurant-->
                     <div class="restaurant_information">
                     <ul>
                         <li>Camis: {{result[0].camis}}</li>
@@ -48,26 +31,15 @@
                     </ul>
                   </div> 
                   </div>
-                  
-                  
-                <!---------->    
-                  
-                    
                     <!--data of inspection results -->
-                <!-- <ul>
-                    <li v-for="(character,index) in result" :key="character.camis">{{index}}- {{character}}</li>
-                </ul> -->
-
+                    <p class="update_date">As of: {{new Date(result[0].record_date).toLocaleDateString()}}</p>
                     <v-data-table
                         :headers="headers"
                         :items="result"
                         :items-per-page="5"
                         class="elevation-1">
                     </v-data-table>
-
-
-                </div>
-                
+                </div>   
               <!---->
             </v-sheet>
           </v-col>
@@ -79,53 +51,54 @@
 </template>
 
 <script>
-//import Map from "@/components/Map.vue"
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
 export default {
     props: ['camis'],
-    // components: {
-    //   Map
-    // },
     components: {
       LMap,
       LTileLayer,
       LMarker
     },
-    //trying to call to api
     data() {
-        return {
-          headers: [
-              {text:'Date', value:'inspection_date'},
-              {text:'Violation_code', value:'violation_code'},
-              {text:'Violation_desc', value:'violation_description'},
-              {text:'critical_flag', value:'critical_flag'},
-              {text:'score', value:'score'},
-              {text:'Grade', value:'grade'},
-              {text:'Grade_date', value:'grade_date'},
-              {text:'record_date', value:'record_date'},
-              {text:'inspection_type', value:'inspection_type'}
-          ],
-          result: [],
-          //show_data: false,
-          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          attribution:
-        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          zoom: 15,
-          center: [51.505, -0.159],
-          markerLatLng: [51.504, -0.159]
-        } 
+      return {
+        headers: [
+          {text:'INSPECTION DATE', value:'inspection_date'},
+          {text:'VIOLATION CODE', value:'violation_code'},
+          {text:'VIOLATION DESCRIPTION', value:'violation_description'},
+          {text:'CRITICAL FLAG', value:'critical_flag'},
+          {text:'SCORE', value:'score'},
+          {text:'GRADE', value:'grade'},
+          {text:'GRADE DATE', value:'grade_date'},
+          {text:'INSPECTION TYPE', value:'inspection_type'}
+        ],
+        result: [],
+        //show_data: false,
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution:
+      '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        zoom: 15,
+        center: [0,0],
+        markerLatLng: [0,0]
+      } 
     },
     async mounted() {
       //console.log(this.camis)
-            const axios = require('axios').default;
-            let url = "https://data.cityofnewyork.us/resource/43nn-pn8j.json?camis=" + this.camis
-            let response = await axios.get(url)
-            console.log(response.data)
-            this.result = response.data
-            //console.log(`result is {this.result}`)
-            this.show_data = !this.show_data
-            this.center = [this.result[0].latitude, this.result[0].longitude]
-            this.markerLatLng = [this.result[0].latitude, this.result[0].longitude]
+      const axios = require('axios').default;
+      let url = "https://data.cityofnewyork.us/resource/43nn-pn8j.json?camis=" + this.camis
+      let response = await axios.get(url)
+      console.log(response.data)
+      this.result = response.data
+      //console.log(`result is ${JSON.stringify(this.result)}`)
+      //console.log(new Date(this.result[0].inspection_date).toLocaleDateString())
+      this.show_data = !this.show_data
+      this.center = [this.result[0].latitude, this.result[0].longitude]
+      this.markerLatLng = [this.result[0].latitude, this.result[0].longitude]
+      //inspection_date, grade_date, record_date
+      for(let i = 0; i < this.result.length; ++i) {
+        this.result[i].inspection_date = new Date(this.result[i].inspection_date).toLocaleDateString()
+        this.result[i].grade_date = new Date(this.result[i].grade_date).toLocaleDateString()
+        //this.result[i].record_date = new Date(this.result[i].record_date).toLocaleDateString()
+      }
     }
 
 }
@@ -152,6 +125,10 @@ export default {
 }
 .name {
   text-align: center;
+}
+.update_date {
+  text-align: end;
+  padding-right: 15px;
 }
 
 </style>
