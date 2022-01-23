@@ -127,11 +127,12 @@
         <v-list-item-content>
            <!--description page links-->
         <router-link :to="{name: 'Description', params: {camis: item.camis}}" class="routerlinks">  
+          <div v-text="item.dba"></div>
           <span
             class="text-uppercase font-weight-regular text-caption"
             v-text="item.cuisine_description"
           ></span>
-          <div v-text="item.dba"></div>
+          
         </router-link>
         </v-list-item-content>
       </v-list-item>
