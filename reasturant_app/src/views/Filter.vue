@@ -1,31 +1,28 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="app">
 
-    <v-main class="grey lighten-3">
+    <v-main >
       <v-container>
         <v-row justify='center'>
-
-
-          <v-col
-            cols="8"
-
-          >
-
-
-
-                <v-form
-                    ref="form"
-                    v-model="search"
-        append-icon="mdi-magnify"
-        label="Search Restaurants"
-                    lazy-validation
-
-                >
-                    <v-text-field
-                    v-model="Rest_dba"
-                    label="Full Restaurant Name"
-
-                    ></v-text-field>
+          <v-col cols="12"
+            sm="12">
+          <v-sheet
+              min-height="70vh"
+              rounded="lg"
+            >
+            <v-form
+              ref="form"
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search Restaurants"
+              lazy-validation
+              style="margin:10px"
+            >
+              <v-text-field
+                v-model="Rest_dba"
+                label="Full Restaurant Name"
+              >
+              </v-text-field>
 
 
                     <v-text-field
@@ -73,7 +70,7 @@
 
                     <v-text-field
                     v-model="zipcode"
-                    label="zipcode"
+                    label="Zip Code"
 
                     ></v-text-field>
 
@@ -138,7 +135,7 @@
       </v-list-item>
     </v-list>
   </div>
-
+        </v-sheet>
           </v-col>
 
         </v-row>
@@ -314,5 +311,13 @@
   height: 800px;
   overflow-y:auto;
 
+}
+#app {
+  background: url('https://wallpaperaccess.com/full/271708.jpg');
+    /* no-repeat center center fixed !important; */
+  background-size: 100% ;
+  /* background-repeat: no-repeat; */
+  /* height:100% ;
+  width: 100%; */
 }
 </style>
