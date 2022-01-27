@@ -1,7 +1,7 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="app">
 
-    <v-main class="grey lighten-3">
+    <v-main >
       <v-container>
         <v-row>
 
@@ -24,9 +24,9 @@
               <div class="about_main_content">
                 <img src="../assets/food.jpeg" alt="Picture of food" style="padding: 10px;">
                 <div id="about_content" style="padding: 10px;">
-                  <p style="margin-bottom: 0;">As we all know, NYC is considered the food capital of the world. According to Vinepair, NYC alone has <q cite="https://vinepair.com/booze-news/new-york-restaurants-eat-at-every-on/">8,282</q> (Vine Pair) restaurant business which would mean it’ll take a person <q cite="https://vinepair.com/booze-news/new-york-restaurants-eat-at-every-on/">
-              22.7 years and never go to same place twice.</q> (Vine Pair) With such plethora of choices, it can be quite overwhelming and super hard to choose.</p>
-                  <p>Restaurant Violation Visualization WebApp is a web application which aims to visualize all restaurant in NYC along with their history of violations. Allowing users to make conscious healthy choices, driven by restaurant history data, on their choosing of cuisines in NYC. </p>
+                  <p style="margin-bottom: 0;"> As we all know, NYC is considered the food capital of the world. According to Vinepair, NYC alone has <q cite="https://vinepair.com/booze-news/new-york-restaurants-eat-at-every-on/">8,282</q> (Vine Pair) restaurant businesses which means that it would take a person nearly <q cite="https://vinepair.com/booze-news/new-york-restaurants-eat-at-every-on/">
+              22.7 years and never go to same place twice.</q> (Vine Pair) With such a plethora of choices, it could be quite overwhelming and hard to choose a restaurant.</p>
+                  <p> This Restaurant Violation Visualization WebApp is a web application which aims to visualize all restaurants in NYC along with their history of violations. This app allows users to make health conscious choices, via restaurant history data, on cuisines in NYC. </p>
                 </div>
               </div>
               <br>
@@ -72,12 +72,20 @@ h1,h2 {
 }
 img{
   float:left;
-  width:33%;
+  width:40%;
   padding: 5px;
 }
 .about_content {
   float:right;
-  width:67%;
+  width:60%;
+}
+#app {
+  background: url('https://wallpaperaccess.com/full/271708.jpg');
+    /* no-repeat center center fixed !important; */
+  background-size: 100% ;
+  background-repeat: no-repeat;
+  /* height:100% ;
+  width: 100%; */
 }
 
 </style>

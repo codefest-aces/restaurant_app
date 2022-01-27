@@ -1,7 +1,8 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="app">
+    <!-- inspire -->
 
-    <v-main class="grey lighten-3">
+    <v-main >
       <v-container>
         <v-row>
 
@@ -135,5 +136,13 @@
 }
 .routerlinks {
   text-decoration: none;
+}
+#app {
+  background: url('https://wallpaperaccess.com/full/271708.jpg');
+    /* no-repeat center center fixed !important; */
+  background-size: 100% ;
+  background-repeat: no-repeat;
+  /* height:100% ;
+  width: 100%; */
 }
 </style>

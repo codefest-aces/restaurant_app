@@ -21,7 +21,7 @@
                     <div class="restaurant_information">
                     <ul>
                         <li>Camis: {{result[0].camis}}</li>
-                        <li>DBA: {{result[0].dba}}</li>
+                        <li>Restaurant Name: {{result[0].dba}}</li>
                         <li>Building: {{result[0].building}}</li>
                         <li>Street: {{result[0].street}}</li>
                         <li>Borough: {{result[0].boro}}</li>

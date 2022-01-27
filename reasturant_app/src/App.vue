@@ -2,28 +2,39 @@
   <v-app id="inspire">
     <v-app-bar
       app
-      color="white"
+      color="black"
       flat
+      
     >
+    
+ <v-img
+  lazy-src="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/ae/76/dc/ae76dc56-9372-4707-2df3-56773249baee/source/512x512bb.jpg"
+  max-height="50"
+  max-width="50"
+  src="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/ae/76/dc/ae76dc56-9372-4707-2df3-56773249baee/source/512x512bb.jpg"
+></v-img>
 
 
       <v-tabs
         centered
         class="ml-n9"
-        color="grey darken-1"
+        color="white  darken-1"
       >
         <v-tab
           to="/"
+          class="white--text"
           >
           Home
         </v-tab>
         <v-tab
           to="/filter"
+          class="white--text"
           >
           Filter Search
         </v-tab>
         <v-tab
           to="/about"
+          class="white--text"
           >
           About
         </v-tab>
@@ -37,7 +48,7 @@
     <router-view ></router-view>
   </template>
   <template v-else>
-    <v-main  class="grey lighten-3">
+    <v-main  class="grey darken-3">
       <v-container fill-height >
         <v-row justify="center"
                 align="center"
