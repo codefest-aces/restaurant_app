@@ -82,10 +82,9 @@ img{
 #app {
   background: url('https://wallpaperaccess.com/full/271708.jpg');
     /* no-repeat center center fixed !important; */
-  background-size: 100% ;
+  /* background-size: 100% ; */
   background-repeat: no-repeat;
-  /* height:100% ;
-  width: 100%; */
+
 }
 
 </style>

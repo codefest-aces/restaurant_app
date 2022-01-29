@@ -316,8 +316,9 @@
   background: url('https://wallpaperaccess.com/full/271708.jpg');
     /* no-repeat center center fixed !important; */
   background-size: 100% ;
-  /* background-repeat: no-repeat; */
+  /* background-repeat: no-repeat;  */
   /* height:100% ;
   width: 100%; */
+  /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,94,247,1) 17.8%, rgba(2,245,255,1) 100.2% ); */
 }
 </style>

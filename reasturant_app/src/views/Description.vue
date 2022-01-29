@@ -3,7 +3,7 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row>
-          <v-col cols="12" sm="12">
+          <v-col cols="12" sm="12" style="z-index:1;">
             <v-sheet min-height="70vh" rounded="lg">
                 <!--Content-->
                 <h1 class="name pt-5"> {{result[0].dba}}</h1>
