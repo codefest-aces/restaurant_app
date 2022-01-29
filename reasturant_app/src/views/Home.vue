@@ -1,25 +1,20 @@
 <template>
   <v-app id="app">
     <!-- inspire -->
-
     <v-main >
       <v-container>
         <v-row>
-
-
           <v-col
             cols="12"
             sm="12"
           >
-
               <!--  -->
-
               <v-card
-    class="mx-auto mt-12"
-    max-width="450"
-  >
-    <v-system-bar></v-system-bar>
-
+                class="mx-auto mt-12"
+                max-width="450"
+              >
+              <v-system-bar>
+              </v-system-bar>
     <v-toolbar
       flat
       color="transparent"
@@ -35,7 +30,6 @@
         single-line
       ></v-text-field>
     </v-toolbar>
-
 
 
     <v-list three-line v-bind:class="{ active: isActive }">
@@ -141,8 +135,9 @@
   background: url('https://wallpaperaccess.com/full/271708.jpg');
     /* no-repeat center center fixed !important; */
   background-size: 100% ;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
   /* height:100% ;
   width: 100%; */
+  /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,94,247,1) 17.8%, rgba(2,245,255,1) 100.2% ); */
 }
 </style>
