@@ -7,6 +7,7 @@ Back end: [Node.js](https://nodejs.org/en/docs/)
 API: [Soda-js](https://github.com/socrata/soda-js) for making calls to NYC Open Data on Restaurant Violations,[Yelp](https://www.yelp.com/developers/documentation/v3) for reviews
 Hosting: Heroku
 Data Visualization: [d3.js](https://github.com/d3/d3/wiki)
+Website Link: https://glacial-beyond-88696.herokuapp.com/#/
 ```
 
 ## Team Members:
