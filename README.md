@@ -13,5 +13,5 @@ Website Link: https://glacial-beyond-88696.herokuapp.com/#/
 * [Jonathan Shnayder](https://github.com/JonathanDog)
 * [Tony Wu](https://github.com/tonywuhoo)
 
-##Deployed App Link:
-[Website](https://glacial-beyond-88696.herokuapp.com/#/)
+## Deployed App Link:
+> [Website](https://glacial-beyond-88696.herokuapp.com/#/)
